@@ -15,6 +15,7 @@ import ReactNative, {
   ViewPropTypes,
   Platform
 } from 'react-native'
+var createReactClass = require('create-react-class');
 
 // Using bare setTimeout, setInterval, setImmediate
 // and requestAnimationFrame calls is very dangerous
@@ -101,7 +102,7 @@ let styles = StyleSheet.create({
 
 // missing `module.exports = exports['default'];` with babel6
 // export default React.createClass({
-module.exports = React.createClass({
+module.exports = createReactClass({
 
   /**
    * Props Validation
