@@ -11,7 +11,6 @@ import ReactNative, {
   ScrollView,
   Dimensions,
   TouchableOpacity,
-  ViewPagerAndroid,
   Platform
 } from 'react-native';
 
@@ -326,16 +325,6 @@ module.exports = createReactClass({
     if (state.dir == 'x') x = diff * state.width;
     if (state.dir == 'y') y = diff * state.height;
 
-    if (Platform.OS === 'android') {
-      this.refs.scrollView && this.refs.scrollView.setPage(diff);
-    } else {
-      this.refs.scrollView &&
-        this.refs.scrollView.scrollTo({
-          y: y,
-          x: x
-        });
-    }
-
     // update scroll state
     this.setState({
       isScrolling: true,
@@ -474,7 +463,6 @@ module.exports = createReactClass({
     );
   },
   renderScrollView(pages) {
-    if (Platform.OS === 'ios')
       return (
         <ScrollView
           ref="scrollView"
@@ -489,18 +477,6 @@ module.exports = createReactClass({
           {pages}
         </ScrollView>
       );
-    return (
-      <ViewPagerAndroid
-        ref="scrollView"
-        {...this.props}
-        initialPage={this.state.index}
-        onPageSelected={this.onScrollEnd}
-        style={{ flex: 1 }}
-        onPageScroll={this.onAndroidScroll}
-      >
-        {pages}
-      </ViewPagerAndroid>
-    );
   },
   /**
    * Inject state to ScrollResponder
